@@ -1,0 +1,6 @@
+services:
+  webapp-template-frontend:
+    command: npm run dev
+
+  webapp-template-backend:
+    command: npm run start:dev

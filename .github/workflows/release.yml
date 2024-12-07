@@ -22,6 +22,6 @@ jobs:
     steps:
       - name: Run tests
         uses: ./.github/workflows/unit-tests.yml
-      with:
-        app-name: ${{ matrix.instance.app-name }}
+        with:
+          app-name: ${{ matrix.instance.app-name }}
 

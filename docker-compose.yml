@@ -1,18 +1,23 @@
 services:
   webapp-template-frontend:
+    container_name: webapp-template-frontend
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    environment:
+      API_BASE_URL: http://webapp-template-backend:8000
     ports:
       - 3000:3000
     command: npm run start
 
   webapp-template-backend:
+    container_name: webapp-template-backend
     build:
       context: ./backend
       dockerfile: Dockerfile
-    volumes:
-      - ./data:/data
+    environment:
+      DATABASE_PATH: ./data/data.db
     ports:
       - 8000:8000
     command: npm run start
+

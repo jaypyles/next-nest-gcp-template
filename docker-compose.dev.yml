@@ -1,6 +1,13 @@
 services:
   webapp-template-frontend:
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
     command: npm run dev
 
   webapp-template-backend:
+    volumes:
+      - ./backend/src:/app/src
+      - ./backend/data:/app/data
+
     command: npm run start:dev

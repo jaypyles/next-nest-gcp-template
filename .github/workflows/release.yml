@@ -1,0 +1,26 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  matrix:
+    test:
+      strategy:
+        matrix:
+          instance:
+            - name: frontend
+              app-name: frontend
+            - name: backend
+              app-name: backend
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run tests
+        uses: ./.github/workflows/unit-tests.yml
+      with:
+        app-name: ${{ matrix.instance.app-name }}
+

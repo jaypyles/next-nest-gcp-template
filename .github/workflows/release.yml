@@ -1,27 +1,25 @@
 name: Release
 
 on:
-  workflow_call:
+  workflow_call:  
   push:
     branches:
-      - main
+      - main  
 
 jobs:
   matrix:
-    test:
-      strategy:
-        matrix:
-          instance:
-            - name: frontend
-              app-name: frontend
-            - name: backend
-              app-name: backend
-
-  test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        instance:
+          - { name: frontend, app-name: frontend }
+          - { name: backend, app-name: backend }
+
     steps:
-      - name: Run tests
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run unit tests for ${{ matrix.instance.app-name }}
         uses: ./.github/workflows/unit-tests.yml
         with:
           app-name: ${{ matrix.instance.app-name }}
-

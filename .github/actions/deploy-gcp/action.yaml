@@ -41,7 +41,7 @@ runs:
       shell: bash
 
     - name: Set up GCP credentials
-      uses: google-github-actions/setup-gcloud@v4
+      uses: google-github-actions/setup-gcloud@v0
       with:
         project_id: ${{ inputs.gcp-project }}
         credentials_json: ${{ inputs.gcp-sa-key }}

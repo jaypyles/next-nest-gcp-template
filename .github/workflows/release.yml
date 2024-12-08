@@ -48,6 +48,7 @@ jobs:
           gcp-project: nng-webapp-template
           gcp-region: us-central1
           gcp-sa-key: ${{ secrets.GCP_SA_KEY }}
+          gcp-sa: ${{ secrets.GCP_SA }}
           dockerhub-repo: ${{ secrets.DOCKERHUB_USERNAME }}/nng-frontend
 
   # deploy-vercel:

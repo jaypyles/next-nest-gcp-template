@@ -15,6 +15,10 @@ inputs:
     description: 'The GCP region'
     required: true
     type: string
+  gcp-sa:
+    description: 'The GCP service account email'
+    required: true
+    type: string
   gcp-sa-key:
     description: 'The GCP service account key'
     required: true
@@ -48,6 +52,8 @@ runs:
 
     - name: Deploy to Cloud Run
       run: |
+        gcloud config set account 
+
         gcloud run deploy ${{ inputs.app-name }} \
           --image docker.io/${{ inputs.dockerhub-repo }}:${{ steps.vars.outputs.sha_short }} \
           --platform managed \

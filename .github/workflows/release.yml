@@ -28,8 +28,7 @@ jobs:
 
       - name: Build and push Docker image for ${{ matrix.instance.app-name }}
         uses: ./.github/actions/docker-image
-        secrets:
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
         with:
           app-name: ${{ matrix.instance.app-name }}
+          dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
+          dockerhub-token: ${{ secrets.DOCKERHUB_TOKEN }}

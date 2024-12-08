@@ -7,14 +7,12 @@ inputs:
     description: 'The name of the app to build a Docker image for'
     required: true
     type: string
-
-secrets:
-  DOCKERHUB_USERNAME:
-    description: 'The Docker Hub username'
+  dockerhub-token:
+    description: 'The Docker Hub token'
     required: true
     type: string
-  DOCKERHUB_TOKEN:
-    description: 'The Docker Hub token'
+  dockerhub-username:
+    description: 'The Docker Hub username'
     required: true
     type: string
 

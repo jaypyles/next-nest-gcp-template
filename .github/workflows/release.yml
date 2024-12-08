@@ -12,8 +12,12 @@ jobs:
     strategy:
       matrix:
         instance:
-          - { name: frontend, app-name: frontend, dockerhub-repo: ${{ secrets.DOCKERHUB_USERNAME }}/nng-frontend }
-          - { name: backend, app-name: backend, dockerhub-repo: ${{ secrets.DOCKERHUB_USERNAME }}/nng-backend }
+          - name: frontend
+            app-name: frontend
+            dockerhub-repo: ${{ secrets.DOCKERHUB_USERNAME }}/nng-frontend
+          - name: backend
+            app-name: backend
+            dockerhub-repo: ${{ secrets.DOCKERHUB_USERNAME }}/nng-backend
 
     steps:
       - name: Checkout repository

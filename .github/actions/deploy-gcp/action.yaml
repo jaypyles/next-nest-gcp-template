@@ -56,5 +56,6 @@ runs:
           --memory 1Gi \
           --cpu 1 \
           --port 8000 \
-          --allow-unauthenticated
+          --allow-unauthenticated \
+          --command "npm run start"
       shell: bash

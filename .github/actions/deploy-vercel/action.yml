@@ -2,6 +2,11 @@ name: Deploy to Vercel
 
 description: 'Deploys Services to Vercel.'
 
+inputs:
+  vercel-token:
+    description: 'The Vercel token'
+    required: true
+    type: string
 
 runs:
   using: 'composite'
@@ -31,8 +36,5 @@ runs:
       shell: bash 
 
     - name: Deploy to Vercel
-      env:
-        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-
-      run: npx vercel --prod --token $VERCEL_TOKEN
+      run: npx vercel --prod --token ${{ inputs.vercel-token }}
       shell: bash 

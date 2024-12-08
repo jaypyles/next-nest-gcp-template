@@ -59,3 +59,5 @@ jobs:
 
       - name: Deploy
         uses: ./.github/actions/deploy-vercel
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}

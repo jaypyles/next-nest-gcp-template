@@ -42,11 +42,15 @@ runs:
         restore-keys: |
           ${{ runner.os }}-buildx-
 
+    - name: List directory contents
+      run: ls -la ./${{ inputs.app-name }}
+      shell: bash
+
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
         context: ./${{ inputs.app-name }}
-        file: ./Dockerfile
+        file: Dockerfile
         push: true
         tags: |
           ${{ inputs.dockerhub-username }}/${{ inputs.app-name }}:${{ steps.vars.outputs.sha_short }}

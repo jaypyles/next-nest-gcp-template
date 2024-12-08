@@ -12,10 +12,8 @@ jobs:
     strategy:
       matrix:
         instance:
-          - name: frontend
-            app-name: frontend
-          - name: backend
-            app-name: backend
+          - app-name: frontend
+          - app-name: backend
 
     steps:
       - name: Checkout repository

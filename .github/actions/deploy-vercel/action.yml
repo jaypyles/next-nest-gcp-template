@@ -24,12 +24,15 @@ runs:
 
     - name: Install dependencies
       run: npm install
+      shell: bash 
 
     - name: Build project
       run: npm run build
+      shell: bash 
 
     - name: Deploy to Vercel
       env:
         VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
       run: npx vercel --prod --token $VERCEL_TOKEN
+      shell: bash 

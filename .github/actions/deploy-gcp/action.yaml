@@ -55,5 +55,6 @@ runs:
           --timeout 30 \
           --memory 1Gi \
           --cpu 1 \
+          --port 8000 \
           --allow-unauthenticated
       shell: bash

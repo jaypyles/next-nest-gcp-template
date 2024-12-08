@@ -60,4 +60,5 @@ jobs:
       - name: Deploy
         uses: ./.github/actions/deploy-vercel
         with:
+          app-name: frontend
           vercel-token: ${{ secrets.VERCEL_TOKEN }}

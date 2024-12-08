@@ -3,6 +3,10 @@ name: Deploy to Vercel
 description: 'Deploys Services to Vercel.'
 
 inputs:
+  app-name:
+    description: 'The name of the app'
+    required: true
+    type: string
   vercel-token:
     description: 'The Vercel token'
     required: true
@@ -28,13 +32,13 @@ runs:
           ${{ runner.os }}-npm-vercel
 
     - name: Install dependencies
-      run: npm install
+      run: cd ${{ inputs.app-name }} && npm install
       shell: bash 
 
     - name: Build project
-      run: npm run build
+      run: cd ${{ inputs.app-name }} && npm run build
       shell: bash 
 
     - name: Deploy to Vercel
-      run: npx vercel --prod --token ${{ inputs.vercel-token }}
+      run: cd ${{ inputs.app-name }} && npx vercel --prod --token ${{ inputs.vercel-token }}
       shell: bash 

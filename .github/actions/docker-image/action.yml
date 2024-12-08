@@ -15,6 +15,10 @@ inputs:
     description: 'The Docker Hub username'
     required: true
     type: string
+  dockerhub-repo:
+    description: 'The Docker Hub repository'
+    required: true
+    type: string
 
 runs:
   using: 'composite'
@@ -52,5 +56,5 @@ runs:
         file: ./${{ inputs.app-name }}/Dockerfile
         push: true
         tags: |
-          ${{ inputs.dockerhub-username }}/${{ inputs.app-name }}:${{ steps.vars.outputs.sha_short }}
-          ${{ inputs.dockerhub-username }}/${{ inputs.app-name }}:latest
+          ${{ inputs.dockerhub-username }}/${{ inputs.dockerhub-repo }}:${{ steps.vars.outputs.sha_short }}
+          ${{ inputs.dockerhub-username }}/${{ inputs.dockerhub-repo }}:latest

@@ -1,0 +1,10 @@
+name: Deploy to Vercel
+
+description: 'Deploys Services to Vercel.'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Deploy
+      run: echo "Deploying to Vercel"
+      shell: bash

@@ -43,9 +43,7 @@ runs:
     - name: Set up Google Cloud authentication
       run: |
         echo "${{ inputs.gcp-sa-key }}" > /tmp/key.json
-        export GOOGLE_APPLICATION_CREDENTIALS=/tmp/key.json
-      env:
-        GOOGLE_APPLICATION_CREDENTIALS: /tmp/key.json
+        cat /tmp/key.json
       shell: bash
 
     - name: Authenticate with Google Cloud

@@ -50,5 +50,5 @@ runs:
     - name: Deploy to Vercel
       run: |
         cd ${{ inputs.app-name }}
-        npx vercel --prod --token ${{ inputs.vercel-token }} --yes --env API_URL=${{ inputs.api-url }}
+        npx vercel --prod --token ${{ inputs.vercel-token }} --yes --env API_BASE_URL=${{ inputs.api-url }}
       shell: bash 

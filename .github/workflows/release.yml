@@ -19,12 +19,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Check if the file exists
-        run: |
-          echo "Listing files in .github/actions:"
-          ls -R .github/actions
-
       - name: Run unit tests for ${{ matrix.instance.app-name }}
-        uses: ./.github/actions/unit-tests.yml
+        uses: ./.github/actions/unit-tests/action.yml
         with:
           app-name: ${{ matrix.instance.app-name }}

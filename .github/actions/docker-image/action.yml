@@ -7,10 +7,6 @@ inputs:
     description: 'The name of the app to build a Docker image for'
     required: true
     type: string
-  dockerhub-repo:
-    description: 'The Docker Hub repository'
-    required: true
-    type: string
 
 secrets:
   DOCKERHUB_USERNAME:
@@ -53,5 +49,5 @@ runs:
         file: ./Dockerfile
         push: true
         tags: |
-          ${{ inputs.dockerhub-repo }}:${{ inputs.sha_short }}
-          ${{ inputs.dockerhub-repo }}:latest
+          ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.app-name }}:${{ inputs.sha_short }}
+          ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.app-name }}:latest

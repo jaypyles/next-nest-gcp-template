@@ -48,8 +48,8 @@ runs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
-        context: ./${{ inputs.app-name }}/Dockerfile
-        file: Dockerfile
+        context: ./${{ inputs.app-name }}
+        file: ./${{ inputs.app-name }}/Dockerfile
         push: true
         tags: |
           ${{ inputs.dockerhub-username }}/${{ inputs.app-name }}:${{ steps.vars.outputs.sha_short }}

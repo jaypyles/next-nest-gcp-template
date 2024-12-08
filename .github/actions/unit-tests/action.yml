@@ -31,8 +31,10 @@ runs:
       run: |
         cd ${{ inputs.app-name }}
         npm install
+      shell: bash
 
     - name: Run tests
       run: |
         cd ${{ inputs.app-name }}
         npm test
+      shell: bash

@@ -44,7 +44,7 @@ runs:
       uses: google-github-actions/setup-gcloud@v0
       with:
         project_id: ${{ inputs.gcp-project }}
-        credentials_json: ${{ inputs.gcp-sa-key }}
+        service_account_key: ${{ inputs.gcp-sa-key }}
 
     - name: Deploy to Cloud Run
       run: |

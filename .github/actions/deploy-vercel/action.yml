@@ -32,7 +32,7 @@ runs:
           ${{ runner.os }}-npm-vercel
 
     - name: Install dependencies
-      run: cd ${{ inputs.app-name }} && npm install
+      run: cd ${{ inputs.app-name }} && npm install --legacy-peer-deps
       shell: bash 
 
     - name: Build project

@@ -57,3 +57,4 @@ runs:
           --memory 1Gi \
           --cpu 1 \
           --allow-unauthenticated
+      shell: bash

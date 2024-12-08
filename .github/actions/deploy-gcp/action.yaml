@@ -46,6 +46,7 @@ runs:
         export GOOGLE_APPLICATION_CREDENTIALS=/tmp/key.json
       env:
         GOOGLE_APPLICATION_CREDENTIALS: /tmp/key.json
+      shell: bash
 
     - name: Authenticate with Google Cloud
       uses: google-github-actions/auth@v1

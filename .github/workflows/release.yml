@@ -8,53 +8,51 @@ on:
       - main  
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        instance:
-          - app-name: frontend
-            dockerhub-repo: nng-frontend
-          - app-name: backend
-            dockerhub-repo: nng-backend
+  # build:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       instance:
+  #         - app-name: frontend
+  #           dockerhub-repo: nng-frontend
+  #         - app-name: backend
+  #           dockerhub-repo: nng-backend
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v3
 
-      - name: Run unit tests for ${{ matrix.instance.app-name }}
-        uses: ./.github/actions/unit-tests
-        with:
-          app-name: ${{ matrix.instance.app-name }}
+  #     - name: Run unit tests for ${{ matrix.instance.app-name }}
+  #       uses: ./.github/actions/unit-tests
+  #       with:
+  #         app-name: ${{ matrix.instance.app-name }}
 
-      - name: Build and push Docker image for ${{ matrix.instance.app-name }}
-        uses: ./.github/actions/docker-image
-        with:
-          app-name: ${{ matrix.instance.app-name }}
-          dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
-          dockerhub-token: ${{ secrets.DOCKERHUB_TOKEN }}
-          dockerhub-repo: ${{ matrix.instance.dockerhub-repo }}
+  #     - name: Build and push Docker image for ${{ matrix.instance.app-name }}
+  #       uses: ./.github/actions/docker-image
+  #       with:
+  #         app-name: ${{ matrix.instance.app-name }}
+  #         dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
+  #         dockerhub-token: ${{ secrets.DOCKERHUB_TOKEN }}
+  #         dockerhub-repo: ${{ matrix.instance.dockerhub-repo }}
 
-  deploy-gcp:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Deploy
-        uses: ./.github/actions/deploy-gcp
-        with:
-          app-name: backend
-          gcp-project: nng-webapp-template
-          gcp-region: us-central1
-          gcp-sa-key: ${{ secrets.GCP_SA_KEY }}
-          gcp-sa: ${{ secrets.GCP_SA }}
-          dockerhub-repo: ${{ secrets.DOCKERHUB_USERNAME }}/nng-backend
-
-  # deploy-vercel:
+  # deploy-gcp:
   #   runs-on: ubuntu-latest
   #   needs: build
   #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v3
+
   #     - name: Deploy
-  #       uses: ./.github/actions/deploy-vercel
+  #       uses: ./.github/actions/deploy-gcp
+  #       with:
+  #         app-name: backend
+  #         gcp-region: us-central1
+  #         gcp-sa-key: ${{ secrets.GCP_SA_KEY }}
+  #         dockerhub-repo: ${{ secrets.DOCKERHUB_USERNAME }}/nng-backend
+
+  deploy-vercel:
+    runs-on: ubuntu-latest
+    # needs: deploy-gcp
+    steps:
+      - name: Deploy
+        uses: ./.github/actions/deploy-vercel

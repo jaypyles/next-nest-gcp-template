@@ -7,16 +7,8 @@ inputs:
     description: 'The name of the app'
     required: true
     type: string
-  gcp-project:
-    description: 'The GCP project'
-    required: true
-    type: string
   gcp-region:
     description: 'The GCP region'
-    required: true
-    type: string
-  gcp-sa:
-    description: 'The GCP service account email'
     required: true
     type: string
   gcp-sa-key:

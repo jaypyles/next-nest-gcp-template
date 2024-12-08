@@ -52,7 +52,7 @@ runs:
 
     - name: Deploy to Cloud Run
       run: |
-        gcloud config set account 
+        gcloud config set account ${{ inputs.gcp-sa }}
 
         gcloud run deploy ${{ inputs.app-name }} \
           --image docker.io/${{ inputs.dockerhub-repo }}:${{ steps.vars.outputs.sha_short }} \

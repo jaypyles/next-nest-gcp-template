@@ -38,7 +38,7 @@ runs:
       uses: actions/cache@v3
       with:
         path: /tmp/.buildx-cache
-        key: ${{ runner.os }}-buildx-${{ inputs.sha_short }}-${{ inputs.app-name }}
+        key: ${{ runner.os }}-buildx-${{ steps.vars.outputs.sha_short }}-${{ inputs.app-name }}
         restore-keys: |
           ${{ runner.os }}-buildx-
 
@@ -49,5 +49,5 @@ runs:
         file: ./Dockerfile
         push: true
         tags: |
-          ${{ inputs.dockerhub-username }}/${{ inputs.app-name }}:${{ inputs.sha_short }}
+          ${{ inputs.dockerhub-username }}/${{ inputs.app-name }}:${{ steps.vars.outputs.sha_short }}
           ${{ inputs.dockerhub-username }}/${{ inputs.app-name }}:latest

@@ -1,0 +1,57 @@
+name: 'Build Docker Image'
+
+description: 'Builds a Docker image for a specified app.'
+
+inputs:
+  app-name:
+    description: 'The name of the app to build a Docker image for'
+    required: true
+    type: string
+  dockerhub-repo:
+    description: 'The Docker Hub repository'
+    required: true
+    type: string
+
+secrets:
+  DOCKERHUB_USERNAME:
+    description: 'The Docker Hub username'
+    required: true
+    type: string
+  DOCKERHUB_TOKEN:
+    description: 'The Docker Hub token'
+    required: true
+    type: string
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Get short SHA
+      id: vars
+      run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Cache Docker layers
+      uses: actions/cache@v3
+      with:
+        path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-buildx-${{ inputs.sha_short }}-${{ inputs.app-name }}
+        restore-keys: |
+          ${{ runner.os }}-buildx-
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./${{ inputs.app-name }}
+        file: ./Dockerfile
+        push: true
+        tags: |
+          ${{ inputs.dockerhub-repo }}:${{ inputs.sha_short }}
+          ${{ inputs.dockerhub-repo }}:latest

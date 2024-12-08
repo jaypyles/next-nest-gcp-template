@@ -12,8 +12,8 @@ jobs:
     strategy:
       matrix:
         instance:
-          - { name: frontend, app-name: frontend }
-          - { name: backend, app-name: backend }
+          - { name: frontend, app-name: frontend, dockerhub-repo: ${{ secrets.DOCKERHUB_USERNAME }}/nng-frontend }
+          - { name: backend, app-name: backend, dockerhub-repo: ${{ secrets.DOCKERHUB_USERNAME }}/nng-backend }
 
     steps:
       - name: Checkout repository
@@ -23,3 +23,12 @@ jobs:
         uses: ./.github/actions/unit-tests
         with:
           app-name: ${{ matrix.instance.app-name }}
+
+      - name: Build and push Docker image for ${{ matrix.instance.app-name }}
+        uses: ./.github/actions/docker-image
+        secrets:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        with:
+          app-name: ${{ matrix.instance.app-name }}
+          dockerhub-repo: ${{ matrix.instance.dockerhub-repo }}

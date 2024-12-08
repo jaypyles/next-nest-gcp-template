@@ -44,12 +44,12 @@ jobs:
       - name: Deploy
         uses: ./.github/actions/deploy-gcp
         with:
-          app-name: frontend
+          app-name: backend
           gcp-project: nng-webapp-template
           gcp-region: us-central1
           gcp-sa-key: ${{ secrets.GCP_SA_KEY }}
           gcp-sa: ${{ secrets.GCP_SA }}
-          dockerhub-repo: ${{ secrets.DOCKERHUB_USERNAME }}/nng-frontend
+          dockerhub-repo: ${{ secrets.DOCKERHUB_USERNAME }}/nng-backend
 
   # deploy-vercel:
   #   runs-on: ubuntu-latest

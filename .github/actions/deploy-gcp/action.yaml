@@ -40,12 +40,6 @@ runs:
         echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
       shell: bash
 
-    - name: Set up Google Cloud authentication
-      run: |
-        echo "${{ inputs.gcp-sa-key }}" > /tmp/key.json
-        cat /tmp/key.json
-      shell: bash
-
     - name: Authenticate with Google Cloud
       uses: google-github-actions/auth@v1
       with:
@@ -53,8 +47,6 @@ runs:
 
     - name: Deploy to Cloud Run
       run: |
-        gcloud auth activate-service-account --key-file=/tmp/key.json
-
         gcloud run deploy ${{ inputs.app-name }} \
           --image docker.io/${{ inputs.dockerhub-repo }}:${{ steps.vars.outputs.sha_short }} \
           --platform managed \

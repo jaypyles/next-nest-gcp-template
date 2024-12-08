@@ -57,5 +57,5 @@ runs:
           --cpu 1 \
           --port 8000 \
           --allow-unauthenticated \
-          --command "npm run start"
+          --command npm run start
       shell: bash

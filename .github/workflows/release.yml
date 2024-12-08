@@ -38,6 +38,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - name: Deploy
         uses: ./.github/actions/deploy-gcp
         with:

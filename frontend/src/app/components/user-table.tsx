@@ -4,8 +4,14 @@ import apiService from "@/app/services/api-service";
 import { useState, useEffect } from "react";
 import styles from "./user-table.module.css";
 
+type User = {
+  name: string;
+  email: string;
+  age: number;
+};
+
 export default function UserTable() {
-  const [users, setUsers] = useState<any[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
 
   const handleCreateUser = () => {
     apiService.createUser().then((user) => {

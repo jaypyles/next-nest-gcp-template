@@ -1,0 +1,38 @@
+name: 'Run Unit Tests'
+
+description: 'Runs unit tests for a specified app.'
+
+inputs:
+  app-name:
+    description: 'The name of the app to run tests for'
+    required: true
+    type: string
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '23'
+
+    - name: Cache npm dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-npm-${{ inputs.app-name }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-npm-${{ inputs.app-name }}
+
+    - name: Install dependencies
+      run: |
+        cd ${{ inputs.app-name }}
+        npm install
+
+    - name: Run tests
+      run: |
+        cd ${{ inputs.app-name }}
+        npm test

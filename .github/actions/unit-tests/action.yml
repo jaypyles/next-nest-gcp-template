@@ -30,7 +30,7 @@ runs:
     - name: Install dependencies
       run: |
         cd ${{ inputs.app-name }}
-        npm install
+        npm install --legacy-peer-deps
       shell: bash
 
     - name: Run tests

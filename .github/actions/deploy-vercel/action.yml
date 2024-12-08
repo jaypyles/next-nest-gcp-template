@@ -32,13 +32,19 @@ runs:
           ${{ runner.os }}-npm-vercel
 
     - name: Install dependencies
-      run: cd ${{ inputs.app-name }} && npm install --legacy-peer-deps
-      shell: bash 
+      run: |
+        cd ${{ inputs.app-name }}
+        npm install --legacy-peer-deps
+      shell: bash
 
     - name: Build project
-      run: cd ${{ inputs.app-name }} && npm run build
+      run: |
+        cd ${{ inputs.app-name }}
+        npm run build
       shell: bash 
 
     - name: Deploy to Vercel
-      run: cd ${{ inputs.app-name }} && npx vercel --prod --token ${{ inputs.vercel-token }}
+      run: |
+        cd ${{ inputs.app-name }}
+        npx vercel --prod --token ${{ inputs.vercel-token }}
       shell: bash 
